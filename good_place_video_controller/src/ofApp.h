@@ -1,10 +1,18 @@
 #pragma once
 
 #include "ofMain.h"
+
+//	Core OF
 #include "ofEvents.h"
 
 //	Addons
-#include "ofxXmlSettings.h"
+#include "ofxDmx.h"
+
+//	Constants
+const string ard_port = "COM 6";
+const string dmx_port = "COM 5";
+const int dmx_channel = 1;
+const float length = 120;
 
 class ofApp : public ofBaseApp{
 
@@ -14,15 +22,15 @@ public:
 	void draw();
 	void exit();
 
-	//	Arduino
+	void setupDMX();
+	void connectArduino();
 	void setupArduino(const int& version);
+
 	void digitalPinChanged(const int& pin_num);
 
-	//	Scene
-	void launchScene();
-	void launchInflatable();
-	void retractInflatable();
-	void playAudio();
+	void startScene();
+	void updateScene();
+	void endScene();
 
 	void keyPressed(int key);
 	void keyReleased(int key);
@@ -35,19 +43,20 @@ public:
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
+		
+	//***********************************************
 
-	bool bSetupArd;
-	bool bInflating;
-	bool bSceneRunning;
-	
-	const float length = 60;
-	const float inflate_delay = 10;
-	float inflate_start_time, inflate_run_time;
-	float start_time, run_time;
-
+	//	Arduino
 	ofArduino ard;
-	ofSoundPlayer sound_player;
-	ofxXmlSettings xml_settings;
+	bool bSetupArd;
 
-	int p2, p3, p4, p5, p6;
+	//	DMX
+	ofxDmx dmx;
+
+	//	Scene
+	float run_time, start_time;
+	bool bRunning;
+
+	//	Video
+	ofVideoPlayer video;
 };
