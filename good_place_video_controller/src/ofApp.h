@@ -60,5 +60,6 @@ public:
 	bool bRunning;
 
 	//	Video
-	ofVideoPlayer video;
+	//ofVideoPlayer video;
+	ofxWMFVideoPlayer video;
 };

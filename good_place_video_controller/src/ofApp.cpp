@@ -16,7 +16,7 @@ void ofApp::setup(){
 
 	//	Video
 	ofSetHexColor(0xFFFFFF);
-	video.load("goodplace.mp4");
+	video.loadMovie("goodplace.mp4");
 	video.play();
 }
 
