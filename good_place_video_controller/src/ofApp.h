@@ -10,10 +10,9 @@
 #include "ofxWMFVideoPlayer.h"
 
 //	Constants
-const string ard_port = "COM 6";
+const string ard_port = "COM20";
 const string dmx_port = "COM 5";
 const int dmx_channel = 1;
-const float length = 120;
 const string video_file_name = "21_ORIENTATION VIDEO_248G719GDP1118H REV.mp4";
 
 class ofApp : public ofBaseApp{
@@ -62,4 +61,5 @@ public:
 	//	Video
 	//ofVideoPlayer video;
 	ofxWMFVideoPlayer video;
+	float length;
 };

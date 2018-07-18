@@ -6,35 +6,38 @@ void ofApp::setup(){
 	//	OF Settings
 	//ofSetFrameRate(30);
 	//ofSetVerticalSync(true);
+	ofHideCursor();
 
 	//	App Settings
 	bRunning = false;
 
 	//	Hardware
-	//setupDMX();
-	//connectArduino();
+	setupDMX();
+	connectArduino();
 
 	//	Video
 	ofSetHexColor(0xFFFFFF);
 	video.loadMovie("goodplace.mp4");
-	video.play();
+	length = video.getDuration();
+	//video.play();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
-//	ard.update();
-//	updateScene();
+	ard.update();
+	
 
 	//Video
 	
-	video.update();
+	//video.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 	
-	video.draw(0, 0);
+	ofBackground(0);
+	updateScene();
 }
 
 //--------------------------------------------------------------
@@ -143,6 +146,13 @@ void ofApp::updateScene(){
 		}
 
 		dmx.setLevel(dmx_channel, level);
+
+		if (video.isStopped())
+		{
+			bRunning = false;
+		}
+		video.update();
+		video.draw(0, 0);
 	}
 	else
 	{
@@ -159,6 +169,13 @@ void ofApp::endScene(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+	switch (key)
+	{
+	case 'S':
+		video.stop();
+		endScene();
+		break;
+	}
 }
 
 //--------------------------------------------------------------
