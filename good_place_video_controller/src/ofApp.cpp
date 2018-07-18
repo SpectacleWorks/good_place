@@ -4,32 +4,44 @@
 void ofApp::setup(){
 
 	//	OF Settings
-	ofSetFrameRate(24);
-	ofSetVerticalSync(true);
+	//ofSetFrameRate(30);
+	//ofSetVerticalSync(true);
 
 	//	App Settings
 	bRunning = false;
 
 	//	Hardware
-	setupDMX();
-	connectArduino();
+	//setupDMX();
+	//connectArduino();
+
+	//	Video
+	ofSetHexColor(0xFFFFFF);
+	video.load("goodplace.mp4");
+	video.play();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
-	ard.update();
-	updateScene();
+//	ard.update();
+//	updateScene();
+
+	//Video
+	
+	video.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+	
+	video.draw(0, 0);
 }
 
 //--------------------------------------------------------------
 void ofApp::exit(){
 
+	dmx.clear();
+	dmx.disconnect();
 }
 
 //--------------------------------------------------------------
@@ -100,6 +112,8 @@ void ofApp::startScene(){
 	bRunning = true;
 	start_time = ofGetElapsedTimef();
 	ofLogNotice() << "Scene starting";
+
+	video.play();
 }
 
 //--------------------------------------------------------------
